@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -34,6 +36,23 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout','userLogout');
+    }
+
+    public function userLogout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        if(Auth::guard('admin')->check()){
+            return redirect('/admin'); 
+        }
+        if(Auth::guard('superadmin')->check()){
+            return redirect('/superadmin'); 
+        }
+        else{
+            $request->session()->invalidate();
+            return redirect('/');
+        }
+
     }
 }
