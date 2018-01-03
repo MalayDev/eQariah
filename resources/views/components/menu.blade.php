@@ -12,7 +12,7 @@
                     <a href="{{route('super.account')}}" class="list-group-item">Account</a>
                     <a href="#" class="list-group-item active">Mosque</a>
                     <a href="{{route('super.qariah')}}" class="list-group-item">Qariah</a>
-                @elseif ($route == 'admin/qariah')
+                @elseif ($route == 'superadmin/qariah')
                     <a href="{{route('super.account')}}" class="list-group-item">Account</a>
                     <a href="{{route('super.mosque')}}" class="list-group-item">Mosque</a>
                     <a href="#" class="list-group-item active">Qariah</a>
