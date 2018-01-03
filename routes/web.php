@@ -38,6 +38,9 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/profile', 'AdminController@show')->name('admin.profile');
         Route::get('/account', 'AdminController@account')->name('admin.account');
         Route::get('/qariah', 'AdminController@qariah')->name('admin.qariah');
+        Route::get('/qariah/create', 'AdminController@create')->name('admin.qariah_create');
+        Route::post('/', 'AdminController@store')->name('admin.store');
+        Route::post('/changePassword','AdminController@changePassword')->name('changePassword');
     });
 
     Route::prefix('superadmin')->group(function(){
