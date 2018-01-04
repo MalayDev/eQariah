@@ -2,13 +2,16 @@
 
 @section('content')
 <div class="container">
+        @component('components.breadcumb')
+        @endcomponent
+
         <div class="row">
             @component('components.menu')
             @endcomponent
 
             <div class="col-md-9">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Super Admin Dashboard</div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Mosque List</div>
         
                         <div class="panel-body">
                                 <div class="table-responsive">

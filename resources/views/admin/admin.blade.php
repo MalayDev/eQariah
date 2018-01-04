@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    @component('components.breadcumb')
+    @endcomponent
+
     <div class="row">
 
 

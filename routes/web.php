@@ -52,6 +52,7 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/mosque', 'SuperAdminController@mosque')->name('super.mosque');  
         Route::get('/qariah', 'SuperAdminController@qariah')->name('super.qariah');
         Route::get('getMosque', 'SuperAdminController@getMosque')->name('getMosque');
+        Route::get('getQariah', 'SuperAdminController@getQariah')->name('getQariah');
     });
 
 
