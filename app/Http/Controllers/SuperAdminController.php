@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Superadmin;
 use App\Admin;
+use App\User;
 use Yajra\DataTables\Datatables;
 use DB;
 use Helper;
@@ -123,6 +124,17 @@ class SuperAdminController extends Controller
         $id = auth()->user()->id;
         $mosque = Admin::all();
         return Datatables::of($mosque)
+        ->addColumn('Action', 'components.action')
+        ->rawColumns(['Action'])
+        ->toJson();
+   
+    }
+
+    public function getQariah()
+    {
+        $id = auth()->user()->id;
+        $qariah = User::all();
+        return Datatables::of($qariah)
         ->addColumn('Action', 'components.action')
         ->rawColumns(['Action'])
         ->toJson();
