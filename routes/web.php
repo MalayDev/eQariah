@@ -48,6 +48,10 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/login', 'Auth\SuperAdminLoginController@showLoginForm')->name('superadmin.login');
         Route::post('/login', 'Auth\SuperAdminLoginController@login')->name('superadmin.login.submit');
         Route::get('/logout', 'Auth\SuperAdminLoginController@logout')->name('superadmin.logout');
+        Route::get('/account', 'SuperAdminController@account')->name('super.account');
+        Route::get('/mosque', 'SuperAdminController@mosque')->name('super.mosque');  
+        Route::get('/qariah', 'SuperAdminController@qariah')->name('super.qariah');
+        Route::get('getMosque', 'SuperAdminController@getMosque')->name('getMosque');
     });
 
 

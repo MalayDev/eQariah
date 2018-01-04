@@ -12,6 +12,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet "type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="<?= asset('vendor/components/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     
 </head>
@@ -30,6 +33,12 @@
                     </button>
 
                     <!-- Branding Image -->
+                    @if (Auth::guard('superadmin')->check())
+                        <a class="navbar-brand" href="{{ route('superadmin.dashboard') }}">
+                            {{--  {{ config('app.name', 'Admin') }}  --}}
+                            Superadmin
+                        </a>
+                    @endif
                     @if (Auth::guard('admin')->check())
                         <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
                             {{--  {{ config('app.name', 'Admin') }}  --}}
@@ -132,6 +141,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('script')
     
     
 </body>

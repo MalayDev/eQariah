@@ -6,10 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
+        "components/font-awesome": "^4.7",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.5"
+        "laravelcollective/html": "^5.5",
+        "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -47,6 +49,12 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
+        ],
+        "post-install-cmd": [
+            "@php artisan vendor:publish --tag=public --force"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=public --force"
         ]
     },
     "config": {

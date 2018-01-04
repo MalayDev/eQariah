@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Superadmin;
+use App\Admin;
+use Yajra\DataTables\Datatables;
+use DB;
+use Helper;
 
 class SuperAdminController extends Controller
 {
@@ -90,5 +95,37 @@ class SuperAdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function account()
+    {
+        $id = auth()->user()->id;
+        $super =  Superadmin::find($id);
+        return view('superadmin.account')->with('super',$super);
+    }
+
+    public function mosque()
+    {
+        $id = auth()->user()->id;
+        $super =  Superadmin::find($id);
+        return view('superadmin.mosque')->with('super',$super);
+    }
+
+    public function qariah()
+    {
+        $id = auth()->user()->id;
+        $super =  Superadmin::find($id);
+        return view('superadmin.qariah')->with('super',$super);
+    }
+
+    public function getMosque()
+    {
+        $id = auth()->user()->id;
+        $mosque = Admin::all();
+        return Datatables::of($mosque)
+        ->addColumn('Action', 'components.action')
+        ->rawColumns(['Action'])
+        ->toJson();
+   
     }
 }
