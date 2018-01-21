@@ -33,7 +33,7 @@
             @if (Auth::guard('admin')->check())
                 @if ($route == 'admin')
                     <a href="#" class="list-group-item active">Dashboard</a>
-                    <a href="{{route('admin.account')}}" class="list-group-item">Profile</a>
+                    <a href="{{route('admin.profile')}}" class="list-group-item">Profile</a>
                     <a href="{{route('admin.account')}}" class="list-group-item">Account</a>
                     <a href="{{route('admin.qariah')}}" class="list-group-item">Qariah</a>
                 @elseif ($route == 'admin/profile')

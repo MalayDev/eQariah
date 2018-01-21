@@ -15,7 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'ic', 'age', 'phone_home', 'phone_mobile', 'marital_status', 
+        'residence_period', 'address', 'postcode', 'city', 'state', 'verify_date_nazir', 'remarks_nazir', 
+        'verify_date_headv', 'remarks_headv'
     ];
 
     /**
@@ -26,4 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function admin(){
+        return $this->belongsTo('App\Admin');
+    }
 }

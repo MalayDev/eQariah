@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Excel;
 use App\Admin;
+use App\User;
 use Hash;
 
 class AdminController extends Controller
@@ -46,7 +49,51 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            
+            'fullname' => 'required|string|max:255',
+            'ic' => 'required|numeric|digits:12|unique:users',
+            'age' => 'required|numeric',
+            'pnumber' => 'nullable|numeric|min:12',
+            'hnumber' => 'nullable|numeric|min:12',
+            'martial' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'address' => 'required|max:255',
+            'postcode' => 'required|numeric|digits:5',
+            'state' => 'required',
+            'city' => 'required',
+            'rperiod' => 'required|max:50',
+            'nremarks' => 'nullable|max:255',
+            'nazir_verify_date' => 'required|date',
+            'hvremarks' => 'nullable|max:255',
+            'hv_verify_date' => 'required|date',
+
+        ]);
+
+        $user = new User;
+
+        $user->name = $request->input('fullname');
+        $user->email = $request->input('email');
+        $user->password = bcrypt('ic');
+        $user->ad_id = auth()->user()->id;
+        $user->ic = $request->input('ic');
+        $user->age = $request->input('age');
+        $user->phone_home = $request->input('hnumber');
+        $user->phone_mobile = $request->input('pnumber');
+        $user->marital_status = $request->input('martial');
+        $user->residence_period = $request->input('rperiod');
+        $user->address = $request->input('address');
+        $user->postcode = $request->input('postcode');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+        $user->verify_date_nazir = $request->input('nazir_verify_date');
+        $user->remarks_nazir = $request->input('nremarks');
+        $user->verify_date_headv = $request->input('hv_verify_date');
+        $user->remarks_headv = $request->input('hvremarks');
+       
+        $user->save();
+
+        return redirect()->back()->with('success', 'Account Successfully Created !!');
     }
 
     /**
@@ -105,9 +152,11 @@ class AdminController extends Controller
 
     public function qariah()
     {
-        $id = auth()->user()->id;
-        $admin =  Admin::find($id);
-        return view('admin.qariah')->with('admin',$admin);
+        // $id = auth()->user()->id;
+        // $admin =  Admin::find($id);
+
+        $users = User::all();
+        return view('admin.qariah')->with('users', $users);
     }
 
     public function changePassword(Request $request){
@@ -135,6 +184,59 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success','Password changed successfully !');
         
+    }
+    public function upload()
+    {
+        return view('admin.upload');
+    }
+    public function import(Request $request){
+
+        if($request->hasFile('qariah')){
+
+            $path = $request->file('qariah')->getRealPath();
+            $data = \Excel::load($path)->get();
+
+            if($data->count()){
+
+                foreach($data as $key => $value){
+
+                    $rt_list[] = [
+                        
+                        'plate' => $value->plate,
+                        'capacity' => $value->capacity,
+                        'terminal' => $value->terminal,
+                        'hauler_id' => $value->hauler_id,
+                        'created_at' => date("Y-m-d h:i:s"),
+                        'updated_at' => date("Y-m-d h:i:s")
+
+                    ];
+                }    
+
+                if(!empty($rt_list)){
+
+                    Roadtanker::insert($rt_list);
+                    \Session::flash('success' , 'File imported successfully !!');
+                }
+            }
+        }else {
+            \Session::flash('warning', 'There is no file to import !!');
+        }
+        return Redirect::back();
+    }
+    public function export($type){
+
+        //$rt = Roadtanker::select('plate', 'capacity', 'terminal')->get()->toArray();
+        $rt = Roadtanker::join('haulers', 'roadtankers.hauler_id', '=', 'haulers.id')->select('plate', 'capacity', 'terminal', 'haulers.name as Hauler')->get()->toArray();
+        
+        return \Excel::create('rt-list' , function($excel) use ($rt) {
+
+            $excel->sheet('Roadtanker-List', function($sheet) use ($rt){
+
+                $sheet->fromArray($rt);
+
+            });
+
+        })->download($type);
     }
         
 }

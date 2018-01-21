@@ -30,6 +30,14 @@
                     @elseif ($route == 'admin/qariah')
                         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active">Qariah</li>
+                    @elseif ($route == 'admin/qariah/create')
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.qariah')}}">Qariah</a></li>   
+                        <li class="breadcrumb-item active">Create Qariah</li> 
+                    @elseif ($route == 'admin/qariah/upload')
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.qariah')}}">Qariah</a></li>   
+                        <li class="breadcrumb-item active">Upload Qariah</li>    
                     @endif
                 @endif
             </ol>

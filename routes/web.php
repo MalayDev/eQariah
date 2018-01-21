@@ -24,11 +24,10 @@ Route::group(['middleware' => 'revalidate'],function(){
         return view('welcome');
     });
 
-    Auth::routes();
+   Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
-
+    //Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
     Route::prefix('admin')->group(function(){
         Route::get('/', 'AdminController@index')->name('admin.dashboard');
@@ -39,6 +38,9 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/account', 'AdminController@account')->name('admin.account');
         Route::get('/qariah', 'AdminController@qariah')->name('admin.qariah');
         Route::get('/qariah/create', 'AdminController@create')->name('admin.qariah_create');
+        Route::get('/qariah/upload', 'AdminController@upload')->name('admin.qariah_upload');
+        Route::post('/qariah/upload/import', 'AdminController@import')->name('qariah.import');
+        Route::get('/qariah/upload/export/{type}', 'AdminController@export')->name('qariah.export');
         Route::post('/', 'AdminController@store')->name('admin.store');
         Route::post('/changePassword','AdminController@changePassword')->name('changePassword');
     });

@@ -12,22 +12,22 @@
                 <div class="panel-heading">Qariah</div>
                 <div class="panel-body">
                     <a href="{{ url('admin/qariah/create') }}" class="btn btn-primary">Add Qariah</a>
-                    <a href="#" class="btn btn-success">Upload Excel</a>
+                    <a href="{{ url('admin/qariah/upload') }}" class="btn btn-success">Upload Excel</a>
                 </div>
-
+                @if(count($users) > 0)
                 <table class="table">
                         <tr>
                             <th>#</th>
-                            <th>Code</th>
                             <th>Name</th>
-                            <th>Region</th>
+                            <th>IC</th>
                             <th>Options</th>
                         </tr>
+                        <?php $counter = 1; ?>
+                        @foreach($users as $user)
                         <tr>
-                            <td>1</td>
-                            <td>M838</td>
-                            <td>Kerteh</td>
-                            <td>Eastern</td>
+                            <td>{{$counter++}}</td>
+                            <td>{{$user->name}}</td>
+                            <td>{{$user->ic}}</td>
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
@@ -38,22 +38,11 @@
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>M808</td>
-                            <td>KVDT</td>
-                            <td>Central</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#editqariah">Edit</a></li>
-                                        <li><a href="#" data-toggle="modal" data-target="#removeqariah">Remove</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
                     </table>
+                @else
+                <p>No Records Found !!</p>
+                @endif
             </div>
         </div>
     </div>

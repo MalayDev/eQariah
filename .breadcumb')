@@ -1,0 +1,49 @@
+[33mcommit 4cc2abc8c586449787e0fe8a7a7bfad7e3a14baf[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Merge: f157075 71de664
+Author: ayum9497 <ayum9422@gmail.com>
+Date:   Thu Jan 4 16:08:49 2018 +0800
+
+    added v0.6
+
+[33mcommit f157075a3897bbb57ea25e8a98fb438fad161931[m
+Merge: e95d7f1 e0fa66a
+Author: ayum9497 <ayum9422@gmail.com>
+Date:   Thu Jan 4 16:01:29 2018 +0800
+
+    added v0.2+v0.4+v0.5
+
+[33mcommit 71de66466905716f29d939f7ec8c157c2faffe6a[m[33m ([m[1;31morigin/v0.6---SA-Dashboard+Account[m[33m)[m
+Author: xshrxf11 <ashrafjeff@gmail.com>
+Date:   Thu Jan 4 15:47:34 2018 +0800
+
+    messages
+
+[33mcommit e95d7f18661b59e40918c4901335570357491b76[m[33m ([m[1;31morigin/v0.5---laravelcollective+updatepwd[m[33m, [m[1;32mv0.5---laravelcollective+updatepwd[m[33m, [m[1;32mV0.2---Multi-Auth+Multi-Lang[m[33m)[m
+Author: ayum9497 <ayum9422@gmail.com>
+Date:   Thu Jan 4 00:59:41 2018 +0800
+
+    added laravelcollective+updatepwd+accountpage+qariahpage+createqariahpage
+
+[33mcommit e0fa66a113c4d0fb9cc7a5fae48678923d3587a0[m[33m ([m[1;31morigin/v0.4---Datatables+FontAwesome[m[33m)[m
+Author: xshrxf11 <ashrafjeff@gmail.com>
+Date:   Wed Jan 3 15:31:59 2018 +0800
+
+    fixed route
+
+[33mcommit d0aedd72c8ed6eb8e8780790a7fa3836517865f7[m
+Author: xshrxf11 <ashrafjeff@gmail.com>
+Date:   Wed Jan 3 00:57:47 2018 +0800
+
+    added Datatables & FontAwesome
+
+[33mcommit 60c22b3895fa5b1d241af43862e61d241028880a[m[33m ([m[1;31morigin/V0.2---Multi-Auth+Multi-Lang[m[33m)[m
+Author: xshrxf11 <ashrafjeff@gmail.com>
+Date:   Mon Jan 1 14:21:47 2018 +0800
+
+    added multi-auth+multi-lang
+
+[33mcommit a8e71b02fd7009b77ceaedc49e576dc0c57e844d[m[33m ([m[1;33mtag: v0.0[m[33m, [m[1;31morigin/release[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/develop[m[33m, [m[1;32mmaster[m[33m)[m
+Author: ayum9497 <ayum9422@gmail.com>
+Date:   Sat Dec 23 04:21:23 2017 +0800
+
+    initial
