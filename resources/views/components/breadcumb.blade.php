@@ -16,6 +16,26 @@
                     @elseif ($route == 'superadmin/qariah')
                         <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item active">Qariah</li>
+                    @elseif ($route == 'superadmin/qariah/create')
+                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>   
+                        <li class="breadcrumb-item active">Create Qariah</li>
+                    @elseif (strpos($route,'superadmin/qariah/show')!== false)
+                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>   
+                        <li class="breadcrumb-item active">Qariah Profile</li>
+                    @elseif (strpos($route,'superadmin/qariah/edit')!== false)
+                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>   
+                        <li class="breadcrumb-item active">Edit Qariah</li>
+                    @elseif (strpos($route,'superadmin/mosque/show')!== false)
+                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('super.mosque')}}">Mosque</a></li>   
+                        <li class="breadcrumb-item active">Mosque Profile</li>
+                    @elseif (strpos($route,'superadmin/mosque/edit')!== false)
+                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('super.mosque')}}">Mosque</a></li>   
+                        <li class="breadcrumb-item active">Edit Mosque</li>
                     @endif
                 @endif
                 @if (Auth::guard('admin')->check())

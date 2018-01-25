@@ -5,6 +5,13 @@
         @component('components.breadcumb')
         @endcomponent
 
+        @if(session('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{session('success')}}     
+                </div>
+        @endif
+
         <div class="row">
             @component('components.menu')
             @endcomponent
@@ -30,6 +37,31 @@
                 </div>
         </div>
 </div>
+
+<div class="modal fade" id="confirm" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header bg-red">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-warning"></i> Delete Information</h4>
+                </div>
+                <div class="modal-body">
+                        <p>Are you sure to delete?</p>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="delete-btn">Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                
+                
+                </div>
+                </div>
+                <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @endsection
 
 @section('script')
@@ -51,5 +83,16 @@
                 ]
             });
         });
+
+        //////////////////////*CALL MODAL-DELETE*///////////////////////////
+        $(document).on('click', '.form-delete', function(e){
+                e.preventDefault();
+                var $form=$(this);
+                $('#confirm').modal({ backdrop: 'static', keyboard: false })
+                        .on('click', '#delete-btn', function(){
+                        $form.submit();
+                });
+        });
+        </script>
         </script>
 @endsection

@@ -27,7 +27,7 @@ Route::group(['middleware' => 'revalidate'],function(){
    Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
-    //Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+    Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
     Route::prefix('admin')->group(function(){
         Route::get('/', 'AdminController@index')->name('admin.dashboard');
@@ -53,8 +53,19 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/account', 'SuperAdminController@account')->name('super.account');
         Route::get('/mosque', 'SuperAdminController@mosque')->name('super.mosque');  
         Route::get('/qariah', 'SuperAdminController@qariah')->name('super.qariah');
+        Route::get('/qariah/create', 'SuperAdminController@create')->name('super.qariah_create');
+        Route::post('/', 'SuperAdminController@store')->name('super.qariah_store');
+        Route::get('/qariah/show/{ic}/{slug}', 'SuperAdminController@show')->name('super.qariah_show');
+        Route::get('/qariah/edit/{ic}/{slug}', 'SuperAdminController@edit')->name('super.qariah_edit');
+        Route::post('/qariah/update/{id}', 'SuperAdminController@update')->name('super.qariah_update');
+        Route::post('/qariah/destroy/{id}', 'SuperAdminController@destroy')->name('super.qariah_destroy');
+        Route::get('/mosque/show/{id}/{slug}', 'SuperAdminController@mosque_show')->name('super.mosque_show');       
+        Route::get('/mosque/edit/{id}/{slug}', 'SuperAdminController@mosque_edit')->name('super.mosque_edit');
+        Route::post('/mosque/update/{id}', 'SuperAdminController@mosque_update')->name('super.mosque_update');
+        Route::post('/mosque/delete/{id}', 'SuperAdminController@mosque_delete')->name('super.mosque_delete');
         Route::get('getMosque', 'SuperAdminController@getMosque')->name('getMosque');
         Route::get('getQariah', 'SuperAdminController@getQariah')->name('getQariah');
+        Route::post('/changePassword','SuperAdminController@changePassword')->name('super.changePassword');
     });
 
 

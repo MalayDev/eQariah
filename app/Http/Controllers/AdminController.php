@@ -74,7 +74,7 @@ class AdminController extends Controller
 
         $user->name = $request->input('fullname');
         $user->email = $request->input('email');
-        $user->password = bcrypt('ic');
+        $user->password = bcrypt($request->input('ic'));
         $user->ad_id = auth()->user()->id;
         $user->ic = $request->input('ic');
         $user->age = $request->input('age');
