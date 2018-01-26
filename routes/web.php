@@ -24,10 +24,12 @@ Route::group(['middleware' => 'revalidate'],function(){
         return view('welcome');
     });
 
-   Auth::routes();
+    Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/user/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+    Route::get('/user/login', 'Auth\LoginController@showLoginForm')->name('user.login');
+    Route::post('/user/login', 'Auth\LoginController@login')->name('user.login.submit');
 
     Route::prefix('admin')->group(function(){
         Route::get('/', 'AdminController@index')->name('admin.dashboard');

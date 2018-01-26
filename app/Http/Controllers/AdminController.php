@@ -202,8 +202,8 @@ class AdminController extends Controller
 
                     $rt_list[] = [
                         
-                        'plate' => $value->plate,
-                        'capacity' => $value->capacity,
+                        'name' => $value->plate,
+                        'email' => $value->capacity, 
                         'terminal' => $value->terminal,
                         'hauler_id' => $value->hauler_id,
                         'created_at' => date("Y-m-d h:i:s"),
