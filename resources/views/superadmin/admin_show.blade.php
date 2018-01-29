@@ -71,12 +71,12 @@
                         
                     <div class="panel-body">
                             <div class="row">
-                                <img  class="col-md-12" style="width:100%" src="{{ asset('storage/MY.png') }}">
+                                    <img class="col-md-12" style="width:100%" src="/storage/admin_images/{{$admin->image}}">
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="#" class="col-md-12 btn btn-default">Upload Picture</a>
+                                        <a href="{{ route('super.mosque_edit',[$admin->id,str_slug($admin->name,'-')])}}" class="col-md-12 btn btn-default">Update Profile</a>
                                 </div>
                             </div>
                             

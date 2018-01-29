@@ -25,6 +25,7 @@ class ChangeAttToNullable extends Migration
             $table->string('postcode')->nullable()->change();
             $table->string('city')->nullable()->change();
             $table->string('state')->nullable()->change();
+            $table->string('image')->nullable()->change();
             $table->dateTime('verify_date_nazir')->nullable()->change();
             $table->string('remarks_nazir')->nullable()->change();
             $table->dateTime('verify_date_headv')->nullable()->change();

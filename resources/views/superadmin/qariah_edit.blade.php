@@ -9,7 +9,7 @@
 
     <!-- <a class="btn btn-default btn-sm" href="{{ url('admin/qariah') }}">Back</a> -->
          <!-- <div class="page-header"><h1>Add Qariah</h1></div> -->
-        {!! Form::open(['action' => ['SuperAdminController@update', $user->id], 'method' => 'POST']) !!}
+        {!! Form::open(['action' => ['SuperAdminController@update', $user->id], 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
        
             <div class="row">
                 <div class="col-md-6">
@@ -158,7 +158,27 @@
                 </div> 
                 <div class="col-md-6">
                     <div class="panel panel-default">
-                    <div class="panel-heading">Part B: Qariah Verification</div>
+                        <div class="panel-heading">Part B: Qariah Profile Photo</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <img  class="col-md-12 col-md-offset-3" style="width:50%" src="/storage/user_images/{{$user->image}}">
+                                
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12 col-md-offset-3">
+                                        {{--  {{Form::file('before_image')}}  --}}
+                                        <input id="userfile" name="userfile" accept="image/gif, image/jpeg, image/png" style="display:none;"/>
+                                        <input type="button" id="userInput" style="width:50%" name="userInput" class="btn btn-primary btn-block" value="Choose Photo" 
+                                        onfocus="document.getElementById('userfile').type='file'" onclick="document.getElementById('userfile').click();" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="panel panel-default">
+                    <div class="panel-heading">Part C: Qariah Verification</div>
                         <div class="panel-body">
                             <div class="form-group{{ $errors->has('nremarks') ? ' has-error' : '' }}">
                                 {{Form::label('nremarks', 'Nazir Remarks')}}

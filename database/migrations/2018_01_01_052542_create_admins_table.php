@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
             $table->string('postcode');
             $table->string('city');
             $table->string('state');
+            $table->string('image')->nullable(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -198,7 +198,8 @@
                         
                     <div class="panel-body">
                             <div class="row">
-                                <img  class="col-md-12" style="width:100%" src="{{ asset('storage/MY.png') }}">
+                                <img class="col-md-12" style="width:100%" src="/storage/user_images/{{$user->image}}">
+                                
                             </div>
                             <br>
                             <div class="row">

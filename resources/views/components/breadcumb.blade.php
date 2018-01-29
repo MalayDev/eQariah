@@ -7,35 +7,37 @@
                 @if (Auth::guard('superadmin')->check())
                     @if ($route == 'superadmin')
                         <li class="breadcrumb-item active"><i class="fa fa-dashboard"></i> Dashboard</li>
-                    @elseif ($route == 'superadmin/account')
+                    @else
                         <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Account</li>
-                    @elseif ($route == 'superadmin/mosque')
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Mosque</li>
-                    @elseif ($route == 'superadmin/qariah')
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Qariah</li>
-                    @elseif ($route == 'superadmin/qariah/create')
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>   
-                        <li class="breadcrumb-item active">Create Qariah</li>
-                    @elseif (strpos($route,'superadmin/qariah/show')!== false)
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>   
-                        <li class="breadcrumb-item active">Qariah Profile</li>
-                    @elseif (strpos($route,'superadmin/qariah/edit')!== false)
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>   
-                        <li class="breadcrumb-item active">Edit Qariah</li>
-                    @elseif (strpos($route,'superadmin/mosque/show')!== false)
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('super.mosque')}}">Mosque</a></li>   
-                        <li class="breadcrumb-item active">Mosque Profile</li>
-                    @elseif (strpos($route,'superadmin/mosque/edit')!== false)
-                        <li class="breadcrumb-item"><a href="{{route('superadmin.dashboard')}}">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('super.mosque')}}">Mosque</a></li>   
-                        <li class="breadcrumb-item active">Edit Mosque</li>
+                        @if (strpos($route,'superadmin/account')!== false) 
+                            <li class="breadcrumb-item active">Account</li>
+                        @elseif (strpos($route,'superadmin/mosque')!== false) 
+                            @if ($route == 'superadmin/mosque') 
+                                <li class="breadcrumb-item active">Mosque</li>
+                            @else
+                                <li class="breadcrumb-item"><a href="{{route('super.mosque')}}">Mosque</a></li>
+                                @if (strpos($route,'/show')!== false)
+                                    <li class="breadcrumb-item active">Mosque Profile</li>
+                                @elseif (strpos($route,'/edit')!== false)
+                                    <li class="breadcrumb-item active">Edit Mosque Profile</li>
+                                @endif
+                            @endif
+
+
+                        @elseif (strpos($route,'superadmin/qariah')!== false)  
+                            @if ($route == 'superadmin/qariah') 
+                                <li class="breadcrumb-item active">Qariah</li>
+                            @else
+                                <li class="breadcrumb-item"><a href="{{route('super.qariah')}}">Qariah</a></li>
+                                @if (strpos($route,'/create')!== false)
+                                    <li class="breadcrumb-item active">Create Qariah Profile</li>
+                                @elseif (strpos($route,'/show')!== false)
+                                    <li class="breadcrumb-item active">Qariah Profile</li>
+                                @elseif (strpos($route,'/edit')!== false)
+                                    <li class="breadcrumb-item active">Edit Qariah Profile</li>
+                                @endif
+                            @endif
+                        @endif
                     @endif
                 @endif
                 @if (Auth::guard('admin')->check())

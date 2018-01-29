@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use App\Superadmin;
 use App\Admin;
 use App\User;
@@ -68,6 +69,7 @@ class SuperAdminController extends Controller
             'postcode' => 'required|numeric|digits:5',
             'state' => 'required',
             'city' => 'required',
+            'userfile' =>'image|nullable|max:1999',
             'rperiod' => 'required|max:50',
             'nremarks' => 'nullable|max:255',
             'nazir_verify_date' => 'required|date',
@@ -75,6 +77,23 @@ class SuperAdminController extends Controller
             'hv_verify_date' => 'required|date',
 
         ]);
+
+        $fileNameToStore = 'noimage.jpg';
+
+        //Handle File Upload
+        if($request->hasFile('userfile')){
+            //Get filename with extension
+            $filenameWithExt = $request->file('userfile')->getClientOriginalName();
+            //Get filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get ext
+            $extension = $request->file('userfile')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload image
+            $path = $request->file('userfile')->storeAs('public/user_images', $fileNameToStore); 
+        }
+
 
         $user = new User;
 
@@ -92,6 +111,7 @@ class SuperAdminController extends Controller
         $user->postcode = $request->input('postcode');
         $user->city = $request->input('city');
         $user->state = $request->input('state');
+        $user->image = $fileNameToStore;
         $user->verify_date_nazir = $request->input('nazir_verify_date');
         $user->remarks_nazir = $request->input('nremarks');
         $user->verify_date_headv = $request->input('hv_verify_date');
@@ -225,7 +245,19 @@ class SuperAdminController extends Controller
             ]);
         }
         
-
+        //Handle File Upload
+        if($request->hasFile('userfile')){
+            //Get filename with extension
+            $filenameWithExt = $request->file('userfile')->getClientOriginalName();
+            //Get filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get ext
+            $extension = $request->file('userfile')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload image
+            $path = $request->file('userfile')->storeAs('public/user_images', $fileNameToStore); 
+        }
         
 
         $user->name = $request->input('fullname');
@@ -242,6 +274,9 @@ class SuperAdminController extends Controller
         $user->postcode = $request->input('postcode');
         $user->city = $request->input('city');
         $user->state = $request->input('state');
+        if($request->hasFile('userfile')){
+            $user->image = $fileNameToStore;
+        }
         $user->verify_date_nazir = $request->input('nazir_verify_date');
         $user->remarks_nazir = $request->input('nremarks');
         $user->verify_date_headv = $request->input('hv_verify_date');
@@ -308,6 +343,57 @@ class SuperAdminController extends Controller
    
     }
 
+    public function mosque_create()
+    {
+        return view('superadmin.admin_create');
+    }
+
+    public function mosque_store(Request $request)
+    {
+        $this->validate($request, [
+            
+            'name' => 'required|string|max:255',
+            'address' => 'required|max:255',
+            'postcode' => 'required|numeric|digits:5',
+            'state' => 'required',
+            'city' => 'required',
+            'userfile' =>'image|nullable|max:1999',
+
+        ]);
+
+        $fileNameToStore = 'noimage.jpg';
+
+        //Handle File Upload
+        if($request->hasFile('userfile')){
+            //Get filename with extension
+            $filenameWithExt = $request->file('userfile')->getClientOriginalName();
+            //Get filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get ext
+            $extension = $request->file('userfile')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload image
+            $path = $request->file('userfile')->storeAs('public/admin_images', $fileNameToStore); 
+        }
+
+
+        $admin = new Admin;
+
+        $admin->name = $request->input('name');
+        $admin->email = $request->input('email');
+        $admin->password = bcrypt($request->input('password'));
+        $admin->address = $request->input('address');
+        $admin->postcode = $request->input('postcode');
+        $admin->city = $request->input('city');
+        $admin->state = $request->input('state');
+        $admin->image = $fileNameToStore;
+
+        $admin->save();
+
+        return redirect()->route('super.mosque')->with('success', 'Account Successfully Created !!');
+    }
+
     public function mosque_show($id, $slug)
     {
         $admin =  Admin::find($id);
@@ -344,12 +430,30 @@ class SuperAdminController extends Controller
             ]);
         }
 
+        //Handle File Upload
+        if($request->hasFile('userfile')){
+            //Get filename with extension
+            $filenameWithExt = $request->file('userfile')->getClientOriginalName();
+            //Get filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            //Get ext
+            $extension = $request->file('userfile')->getClientOriginalExtension();
+            //Filename to store
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            //Upload image
+            $path = $request->file('userfile')->storeAs('public/admin_images', $fileNameToStore); 
+        }
+
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
         $admin->address = $request->input('address');
         $admin->postcode = $request->input('postcode');
         $admin->city = $request->input('city');
         $admin->state = $request->input('state');
+        if($request->hasFile('userfile')){
+            $admin->image = $fileNameToStore;
+        }
+
         $admin->save();
 
         return redirect()->route('super.mosque')->with('success', 'Account Successfully Updated !!');

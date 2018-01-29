@@ -25,6 +25,7 @@ class AddAttributeToUsersTable extends Migration
             $table->string('postcode');
             $table->string('city');
             $table->string('state');
+            $table->string('image');
             $table->dateTime('verify_date_nazir');
             $table->string('remarks_nazir');
             $table->dateTime('verify_date_headv');
@@ -52,6 +53,7 @@ class AddAttributeToUsersTable extends Migration
             $table->dropColumn('postcode');
             $table->dropColumn('city');
             $table->dropColumn('state');
+            $table->dropColumn('image');
             $table->dropColumn('verify_date_nazir');
             $table->dropColumn('remarks_nazir');
             $table->dropColumn('verify_date_headv');

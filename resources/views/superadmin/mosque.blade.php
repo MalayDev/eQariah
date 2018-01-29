@@ -18,7 +18,11 @@
 
             <div class="col-md-9">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Mosque List</div>
+                        <div class="panel-heading clearfix">Mosque List
+                                <div class="pull-right">
+                                        <a class="btn btn-sm btn-default" href="{{route('super.mosque_create')}}" role="button"><i class="fa fa-plus"></i> Add Mosque</a>
+                                </div>
+                        </div>
         
                         <div class="panel-body">
                                 <div class="table-responsive">
