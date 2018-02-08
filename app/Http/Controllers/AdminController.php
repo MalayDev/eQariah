@@ -70,6 +70,8 @@ class AdminController extends Controller
 
         ]);
 
+        $fileNameToStore = 'noimage.jpg';
+
         $user = new User;
 
         $user->name = $request->input('fullname');
@@ -90,6 +92,7 @@ class AdminController extends Controller
         $user->remarks_nazir = $request->input('nremarks');
         $user->verify_date_headv = $request->input('hv_verify_date');
         $user->remarks_headv = $request->input('hvremarks');
+        $user->image = $fileNameToStore;
        
         $user->save();
 
@@ -129,7 +132,41 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'fullname' => 'required|string|max:255',
+            'ic' => 'required|numeric|digits:12',
+            'age' => 'required|numeric',
+            'pnumber' => 'nullable|numeric|min:12',
+            'hnumber' => 'nullable|numeric|min:12',
+            'martial' => 'required',
+            'email' => 'required|string|email|max:255',
+            'address' => 'required|max:255',
+            'postcode' => 'required|numeric|digits:5',
+            'state' => 'required',
+            'city' => 'required',
+            'rperiod' => 'required|max:50',
+
+        ]);
+        
+        $user = User::find($id);
+
+        $user->name = $request->input('fullname');
+        $user->email = $request->input('email');
+        $user->ic = $request->input('ic');
+        $user->age = $request->input('age');
+        $user->phone_home = $request->input('hnumber');
+        $user->phone_mobile = $request->input('pnumber');
+        $user->marital_status = $request->input('martial');
+        $user->residence_period = $request->input('rperiod');
+        $user->address = $request->input('address');
+        $user->postcode = $request->input('postcode');
+        $user->city = $request->input('city');
+        $user->state = $request->input('state');
+
+        $user->save();
+
+        return redirect()->back()->with('success','Profile updated !!');
     }
 
     /**
@@ -200,21 +237,33 @@ class AdminController extends Controller
 
                 foreach($data as $key => $value){
 
-                    $rt_list[] = [
+                    $user_list[] = [
                         
-                        'name' => $value->plate,
-                        'email' => $value->capacity, 
-                        'terminal' => $value->terminal,
-                        'hauler_id' => $value->hauler_id,
+                        'name' => $value->name,
+                        'email' => $value->email, 
+                        'password' => bcrypt($value->password), 
                         'created_at' => date("Y-m-d h:i:s"),
-                        'updated_at' => date("Y-m-d h:i:s")
+                        'updated_at' => date("Y-m-d h:i:s"),
+                        'ad_id' => $value->ad_id,
+                        'ic' => $value->ic, 
+                        'age' => $value->age,
+                        'phone_home' => $value->phone_home, 
+                        'phone_mobile' => $value->phone_mobile,
+                        'marital_status' => $value->marital_status,
+                        'address' => $value->address, 
+                        'postcode' => $value->postcode, 
+                        'city' => $value->city, 
+                        'state' => $value->state, 
+                        'image' => $value->image, 
+                        'verify_date_nazir' => date("Y-m-d h:i:s"), 
+                        'verify_date_headv' => date("Y-m-d h:i:s"),
 
                     ];
                 }    
 
-                if(!empty($rt_list)){
+                if(!empty($user_list)){
 
-                    Roadtanker::insert($rt_list);
+                    User::insert($user_list);
                     \Session::flash('success' , 'File imported successfully !!');
                 }
             }
@@ -237,6 +286,20 @@ class AdminController extends Controller
             });
 
         })->download($type);
+    }
+
+    public function show_qariah($id)
+    {
+        //$id = '1';
+        $user = User::find($id);
+
+        return view('admin.qariah_show')->with('user', $user);
+    }
+    public function show_details(Request $request)
+    {
+        $user = User::find($request->id);
+
+        return $user->toJson();
     }
         
 }

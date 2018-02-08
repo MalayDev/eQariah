@@ -59,7 +59,11 @@
                     @elseif ($route == 'admin/qariah/upload')
                         <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="{{route('admin.qariah')}}">Qariah</a></li>   
-                        <li class="breadcrumb-item active">Upload Qariah</li>    
+                        <li class="breadcrumb-item active">Upload Qariah</li>
+                    @elseif (Request::is('admin/qariah/show/*'))
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.qariah')}}">Qariah</a></li>   
+                        <li class="breadcrumb-item active">Show Qariah</li>        
                     @endif
                 @endif
             </ol>

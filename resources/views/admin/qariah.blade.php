@@ -8,20 +8,35 @@
         @component('components.menu')
         @endcomponent
         <div class="col-md-9">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Qariah</div>
                 <div class="panel-body">
-                    <a href="{{ url('admin/qariah/create') }}" class="btn btn-primary">Add Qariah</a>
-                    <a href="{{ url('admin/qariah/upload') }}" class="btn btn-success">Upload Excel</a>
+                    
+                    <div class="row">
+                        
+                        <div class="col-md-8">
+                            <a href="{{ url('admin/qariah/create') }}" class="btn btn-primary">Add Qariah</a>
+                            <a href="{{ url('admin/qariah/upload') }}" class="btn btn-success">Upload Excel</a>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                        </div>    
+                        
+                    </div>  
+                  
+
+                   
                 </div>
-                @if(count($users) > 0)
-                <table class="table">
+                
+                <table class="table" id="myTable">
                         <tr>
                             <th>#</th>
                             <th>Name</th>
                             <th>IC</th>
                             <th>Options</th>
                         </tr>
+                @if(count($users) > 0)
                         <?php $counter = 1; ?>
                         @foreach($users as $user)
                         <tr>
@@ -29,61 +44,120 @@
                             <td>{{$user->name}}</td>
                             <td>{{$user->ic}}</td>
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#" data-toggle="modal" data-target="#editqariah">Edit</a></li>
-                                        <li><a href="#" data-toggle="modal" data-target="#removeqariah">Remove</a></li>
-                                    </ul>
-                                </div>
+                                <button type="button" class="btn btn-warning btn-xs try" id="{{ $user->id }}">Details</button>
+                                <a class="btn btn-success btn-xs" href="{{ route('admin.qariah_show', $user->id) }}" role="button">Update</a>
                             </td>
                         </tr>
                         @endforeach
                     </table>
                 @else
-                <p>No Records Found !!</p>
+                    <tr><td colspan="4"><p align="center">No Record founds !!</p></td></tr>
                 @endif
             </div>
         </div>
     </div>
 </div>
 
-<!-- edit qariah -->
-<div class="modal fade" data-keyboard="false" data-backdrop="static" id="editqariah" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h5 class="modal-title">Edit Qariah</h5>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-       
-    </div>
-</div>
 
-<!-- remove qariah -->
-<div class="modal fade" data-keyboard="false" data-backdrop="static" id="removeqariah" tabindex="-1">
+
+<!-- shoe qariah -->
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="showmodal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h5 class="modal-title">Remove Qariah</h5>
+                <h5 class="modal-title">Qariah Details</h5>
             </div>
             <div class="modal-body">
-                ...
+
+
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Name</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" placeholder="null" id="name" readonly>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Ic</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" placeholder="null" id="ic" readonly>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Home No.</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" placeholder="null" id="phone_home" readonly>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Mob No.</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" placeholder="null" id="phone_mobile" readonly>
+                                </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Marital Status</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" placeholder="null" id="marital_status" readonly>
+                                </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
+
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+   
+    $(document).on('click','.try', function(){
+        var id = $(this).attr('id');
+        
+            $.ajax({
+            type: "POST",
+            url: '{{ route('show_details') }}',
+            data: {id:id},
+            dataType:'json',
+            success: function(data){
+                
+                console.log(data);
+                $('#showmodal').modal('show');
+                $('#name').val(data.name);
+                $('#ic').val(data.ic);
+                $('#marital_status').val(data.marital_status);
+                $('#phone_home').val(data.phone_home);
+                $('#phone_mobile').val(data.phone_mobile);
+                
+            }
+        });
+    });
+    
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 @endsection
+

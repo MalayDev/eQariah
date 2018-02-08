@@ -3,8 +3,26 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
+        <div class="col-md-3">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">User Picture</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <img  class="col-md-12" style="width:100%" src="{{ asset('storage/user_images/'.$user->image) }}">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="#" class="btn btn-default btn-block">Upload Picture</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="panel panel-primary">
                 <div class="panel-heading">User Dashboard</div>
 
                 <!-- <div class="panel-body">
@@ -51,7 +69,11 @@
                     </tr>
                     <tr>
                         <th>Account Created</th>
-                        <td>{{ $user->created_at }}</td>
+                        <td>{{ $user->created_at->format('d M Y | h:i A') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Account Updated</th>
+                        <td>{{ $user->updated_at->format('d M Y | h:i A') }}</td>
                     </tr>
                 </table>
                 @endif

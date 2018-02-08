@@ -39,12 +39,15 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/profile', 'AdminController@show')->name('admin.profile');
         Route::get('/account', 'AdminController@account')->name('admin.account');
         Route::get('/qariah', 'AdminController@qariah')->name('admin.qariah');
+        Route::get('/qariah/show/{id}', 'AdminController@show_qariah')->name('admin.qariah_show');
         Route::get('/qariah/create', 'AdminController@create')->name('admin.qariah_create');
+        Route::post('/qariah/update/{id}', 'AdminController@update')->name('admin.qariah_update');
         Route::get('/qariah/upload', 'AdminController@upload')->name('admin.qariah_upload');
         Route::post('/qariah/upload/import', 'AdminController@import')->name('qariah.import');
         Route::get('/qariah/upload/export/{type}', 'AdminController@export')->name('qariah.export');
         Route::post('/', 'AdminController@store')->name('admin.store');
         Route::post('/changePassword','AdminController@changePassword')->name('changePassword');
+        Route::post('show_details', 'AdminController@show_details')->name('show_details');
     });
 
     Route::prefix('superadmin')->group(function(){
@@ -56,13 +59,11 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/mosque', 'SuperAdminController@mosque')->name('super.mosque');  
         Route::get('/qariah', 'SuperAdminController@qariah')->name('super.qariah');
         Route::get('/qariah/create', 'SuperAdminController@create')->name('super.qariah_create');
-        Route::post('/', 'SuperAdminController@store')->name('super.qariah_store');
         Route::get('/qariah/{ic}/{slug}/show', 'SuperAdminController@show')->name('super.qariah_show');
         Route::get('/qariah/{ic}/{slug}/edit', 'SuperAdminController@edit')->name('super.qariah_edit');
         Route::post('/qariah/update/{id}', 'SuperAdminController@update')->name('super.qariah_update');
         Route::post('/qariah/destroy/{id}', 'SuperAdminController@destroy')->name('super.qariah_destroy');
         Route::get('/mosque/create', 'SuperAdminController@mosque_create')->name('super.mosque_create');
-        Route::post('/', 'SuperAdminController@mosque_store')->name('super.mosque_store');
         Route::get('/mosque/{id}/{slug}/show', 'SuperAdminController@mosque_show')->name('super.mosque_show');       
         Route::get('/mosque/{id}/{slug}/edit', 'SuperAdminController@mosque_edit')->name('super.mosque_edit');
         Route::post('/mosque/update/{id}', 'SuperAdminController@mosque_update')->name('super.mosque_update');
@@ -70,6 +71,8 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('getMosque', 'SuperAdminController@getMosque')->name('getMosque');
         Route::get('getQariah', 'SuperAdminController@getQariah')->name('getQariah');
         Route::post('/changePassword','SuperAdminController@changePassword')->name('super.changePassword');
+        Route::post('/store', 'SuperAdminController@store')->name('super.qariah_store');
+        Route::post('/mosque_store', 'SuperAdminController@mosque_store')->name('super.mosque_store');
     });
 
 

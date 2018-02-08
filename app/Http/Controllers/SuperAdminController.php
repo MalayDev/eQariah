@@ -382,7 +382,7 @@ class SuperAdminController extends Controller
 
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
-        $admin->password = bcrypt($request->input('password'));
+        $admin->password = bcrypt('password');
         $admin->address = $request->input('address');
         $admin->postcode = $request->input('postcode');
         $admin->city = $request->input('city');

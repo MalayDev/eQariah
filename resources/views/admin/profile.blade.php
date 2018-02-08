@@ -9,7 +9,7 @@
         @endcomponent
 
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Profile</div>
 
                 <div class="panel-body">
@@ -66,12 +66,12 @@
         </div>
 
         <div class="col-md-3">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">Profile Picture</div>
                         
                     <div class="panel-body">
                             <div class="row">
-                                <img  class="col-md-12" style="width:100%" src="{{ asset('storage/MY.png') }}">
+                                <img  class="col-md-12" style="width:100%" src="{{ asset('storage/admin_images/'.$admin->image) }}">
                             </div>
                             <br>
                             <div class="row">
