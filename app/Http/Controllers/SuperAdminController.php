@@ -39,8 +39,9 @@ class SuperAdminController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
-     */
+     * @return \Illuminate\Http\Respon
+     * se
+     */    
     public function create()
     {
         $id = auth()->user()->id;
@@ -48,6 +49,7 @@ class SuperAdminController extends Controller
         return view('superadmin.qariah_create')->with('super',$super);
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -382,7 +384,7 @@ class SuperAdminController extends Controller
 
         $admin->name = $request->input('name');
         $admin->email = $request->input('email');
-        $admin->password = bcrypt($request->input('password'));
+        $admin->password = bcrypt('password');
         $admin->address = $request->input('address');
         $admin->postcode = $request->input('postcode');
         $admin->city = $request->input('city');

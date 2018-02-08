@@ -14,7 +14,7 @@
 
     <!-- <a class="btn btn-default btn-sm" href="{{ url('admin/qariah') }}">Back</a> -->
          <!-- <div class="page-header"><h1>Add Qariah</h1></div> -->
-        {!! Form::open(['action' => 'SuperAdminController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
+         {!! Form::open(['action' => 'SuperAdminController@store', 'method' => 'POST', 'enctype' => 'multipart/form-data']) !!}
        
             <div class="row">
                 <div class="col-md-6">
