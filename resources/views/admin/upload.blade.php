@@ -1,9 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.admin_home')
 
 @section('content')
-<div class="container">
+
 @component('components.breadcumb')
 @endcomponent
+
+<div class="grid-form">
+        <div class="grid-form1">
+
 
     @if(session('success'))
     <div class="alert alert-success alert-dismissible" role="alert">
@@ -50,4 +54,5 @@
             </div>
         </div>
     </div>
+</div>
 @endsection

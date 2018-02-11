@@ -50,7 +50,7 @@ class LoginController extends Controller
         $this->validate($request, [
             'ic' => 'required|digits:12',
         ]);
-
+        
         $ic = $request->input('ic');
 
         $user = User::where('ic' ,$ic)->get();
@@ -67,7 +67,7 @@ class LoginController extends Controller
             
         }
 
-        return redirect()->back()->with('warning', 'You not registered yet, please contact admin !!')->withInput($request->only('ic'));
+        return redirect()->back()->with('warning', 'Please contact administrator for registration')->withInput($request->only('ic'));
 
 
 

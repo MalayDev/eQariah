@@ -21,7 +21,7 @@ Route::post('/language', array(
 Route::group(['middleware' => 'revalidate'],function(){
 	
     Route::get('/', function () {
-        return view('welcome');
+        return view('auth.user.user_login');
     });
 
     Auth::routes();
@@ -39,12 +39,16 @@ Route::group(['middleware' => 'revalidate'],function(){
         Route::get('/profile', 'AdminController@show')->name('admin.profile');
         Route::get('/account', 'AdminController@account')->name('admin.account');
         Route::get('/qariah', 'AdminController@qariah')->name('admin.qariah');
+        Route::get('/qariah/show/{id}', 'AdminController@show_qariah')->name('admin.qariah_show');
         Route::get('/qariah/create', 'AdminController@create')->name('admin.qariah_create');
+        Route::post('/qariah/update/{id}', 'AdminController@update')->name('admin.qariah_update');
         Route::get('/qariah/upload', 'AdminController@upload')->name('admin.qariah_upload');
         Route::post('/qariah/upload/import', 'AdminController@import')->name('qariah.import');
         Route::get('/qariah/upload/export/{type}', 'AdminController@export')->name('qariah.export');
         Route::post('/', 'AdminController@store')->name('admin.store');
         Route::post('/changePassword','AdminController@changePassword')->name('changePassword');
+        Route::post('show_details', 'AdminController@show_details')->name('show_details');
+        Route::get('retrieveQariah', 'AdminController@retrieveQariah')->name('retrieveQariah');
     });
 
     Route::prefix('superadmin')->group(function(){
