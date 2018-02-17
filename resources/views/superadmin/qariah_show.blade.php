@@ -1,216 +1,177 @@
-@extends('layouts.app')
+@extends('layouts.admin_home')
 
 @section('content')
-<div class="container">
-    @component('components.breadcumb')
-    @endcomponent
-    <div class="row">
-        @component('components.menu')
-        @endcomponent
 
-        <div class="col-md-6">
-                
-            <div class="panel panel-default">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item active">
-                            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="verify-tab" data-toggle="tab" href="#verify" role="tab" aria-controls="verify" aria-selected="false">Verification</a>
-                        </li>
-                    </ul>
-
-                <div class="panel-body">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <form>
-                                            <div class="form-group{{ $errors->has('fullname') ? ' has-error' : '' }}">
-                                                    {{Form::label('fullname', 'Full Name')}}
-                                                    {{Form::text('fullname', $user->name, ['class' => 'form-control', 'placeholder' => 'Full Name', 'id' => 'fullname'])}}
-                                                   
-                                                    @if ($errors->has('fullname'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('fullname') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                <div class="form-group{{ $errors->has('ic') ? ' has-error' : '' }}">
-                                                    {{Form::label('ic', 'IC. Number')}}
-                                                    {{Form::number('ic', $user->ic, ['class' => 'form-control', 'placeholder' => 'IC. Number', 'id' => 'ic'])}}
-                    
-                                                    @if ($errors->has('ic'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('ic') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                <div class="form-group{{ $errors->has('age') ? ' has-error' : '' }}">
-                                                    {{Form::label('age', 'Age')}}
-                                                    {{Form::number('age', $user->age, ['class' => 'form-control', 'placeholder' => 'Age', 'id' => 'age'])}}
-                    
-                                                    @if ($errors->has('age'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('age') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                 
-                                                
-                                                <div class="form-group{{ $errors->has('martial') ? ' has-error' : '' }}">
-                                                    {{Form::label('martial', 'Martial Status', ['class' => 'radio'])}}
-                                                    @if ($user->marital_status == 'Married')
-                                                        {{Form::radio('martial', 'Married', true)}}
-                                                        {{Form::label('married', 'Married', ['class' => 'radio-inline'])}}
-                                                        &nbsp;
-                                                        {{Form::radio('martial', 'Not Married')}}
-                                                        {{Form::label('notmarried', 'Not Married', ['class' => 'radio-inline'])}}
-                                                    @else
-                                                        {{Form::radio('martial', 'Married')}}
-                                                        {{Form::label('married', 'Married', ['class' => 'radio-inline'])}}
-                                                        &nbsp;
-                                                        {{Form::radio('martial', 'Not Married', true)}}
-                                                        {{Form::label('notmarried', 'Not Married', ['class' => 'radio-inline'])}}
-                                                    @endif
-                    
-                                                    @if ($errors->has('martial'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('martial') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                
-                                                </div>
-                                                <?php $address = $user->address.', '.$user->postcode.', '.$user->city.', '.$user->state;?>
-                                                <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                                                    {{Form::label('address', 'Address')}}
-                                                    {{Form::textarea('address', $address, ['class' => 'form-control', 'placeholder' => 'Address...', 'id' => 'address'])}}
-                    
-                                                    @if ($errors->has('address'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('address') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                <div class="form-group{{ $errors->has('rperiod') ? ' has-error' : '' }}">
-                                                    {{Form::label('residenceperiod', 'Residence Period')}}
-                                                    {{Form::text('rperiod', $user->residence_period, ['class' => 'form-control', 'placeholder' => 'Year + Month', 'id' => 'rperiod'])}}
-                    
-                                                    @if ($errors->has('rperiod'))
-                                                        <span class="help-block">
-                                                            <strong>{{ $errors->first('rperiod') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                    
-                                        </form>
-                            </div>
-                            <div class="tab-pane" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                                <form>
-                                    <div class="form-group{{ $errors->has('pnumber') ? ' has-error' : '' }}">
-                                        {{Form::label('pnumber', 'Phone Number')}}
-                                        {{Form::number('pnumber', $user->phone_mobile, ['class' => 'form-control', 'placeholder' => 'Phone Number', 'id' => 'pnumber'])}}
+@component('components.breadcumb')
+@endcomponent
+<div class="grid-form">
+    <div class="grid-form1">
         
-                                        @if ($errors->has('pnumber'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('pnumber') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>   
-                                    <div class="form-group{{ $errors->has('hnumber') ? ' has-error' : '' }}">
-                                        {{Form::label('hnumber', 'Home Number')}}
-                                        {{Form::number('hnumber', $user->phone_home, ['class' => 'form-control', 'placeholder' => 'Home Number', 'id'=> 'hnumber'])}}
-        
-                                        @if ($errors->has('hnumber'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('hnumber') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                            {{Form::label('email', 'Email (if any)')}}
-                                            {{Form::text('email', $user->email, ['class' => 'form-control', 'placeholder' => 'Email', 'id' => 'email'])}}
+        @if(count($user) > 0)
             
-                                            @if ($errors->has('email'))
-                                                <span class="help-block">
-                                                    <strong>{{ $errors->first('email') }}</strong>
-                                                </span>
-                                            @endif
-                                            
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane" id="verify" role="tabpanel" aria-labelledby="verify-tab">
-                                <form>
-                                    <div class="form-group{{ $errors->has('nremarks') ? ' has-error' : '' }}">
-                                        {{Form::label('nremarks', 'Nazir Remarks')}}
-                                        {{Form::textarea('nremarks', $user->remarks_nazir, ['class' => 'form-control', 'placeholder' => 'Nazir Remarks...', 'id' => 'nremarks'])}}
-        
-                                        @if ($errors->has('nremarks'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('nremarks') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group{{ $errors->has('nazir_verify_date') ? ' has-error' : '' }}">
-                                        {{Form::label('nazir_verify_date', 'Verify Date (Nazir)')}}
-                                        {{Form::date('nazir_verify_date', \Carbon\Carbon::parse($user->verify_date_nazir), ['class' => 'form-control', 'id' => 'nazir_verify_date'])}}
-        
-                                        @if ($errors->has('nazir_verify_date'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('nazir_verify_date') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <hr>
-                                    <div class="form-group{{ $errors->has('hvremarks') ? ' has-error' : '' }}">
-                                        {{Form::label('hvremarks', 'Head Village Remarks')}}
-                                        {{Form::textarea('hvremarks', $user->remarks_headv, ['class' => 'form-control', 'placeholder' => 'Head Village Remarks...', 'id' => 'hvremarks'])}}
-        
-                                        @if ($errors->has('hvremarks'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('hvremarks') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group{{ $errors->has('hv_verify_date') ? ' has-error' : '' }}">
-                                        {{Form::label('hv_verify_date', 'Verify Date (Head Village)')}}
-                                        {{Form::date('hv_verify_date', \Carbon\Carbon::parse($user->verify_date_headv), ['class' => 'form-control', 'id' => 'hv_verify_date'])}}
-        
-                                        @if ($errors->has('hv_verify_date'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('hv_verify_date') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                          
-                </div>
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{session('success')}}     
             </div>
-        </div>
-
-        <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Profile Picture</div>
-                        
-                    <div class="panel-body">
-                            <div class="row">
-                                <img class="col-md-12" style="width:100%" src="/storage/user_images/{{$user->image}}">
-                                
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <a href="{{ route('super.qariah_edit',[$user->ic,str_slug($user->name,'-')])}}" class="col-md-12 btn btn-default">Update Profile</a>
+            @endif
+            
+            <form method="POST" action="{{ route('admin.qariah_update', $user->id) }}">  
+                    {{ csrf_field() }}
+                <div class="row">
+                    <!--Qariah Photo -->
+                    <div class="col-md-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Qariah Picture</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <img  class="col-md-12" style="width:100%" src="{{ asset('storage/user_images/'.$user->image) }}">
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    <a href="{{ route('super.qariah_edit',[$user->ic,str_slug($user->name,'-')])}}" class="btn btn-default btn-block">Update Profile</a>
+                                    </div>
                                 </div>
                             </div>
-                            
+                                    
+                        </div>
                     </div>
-                <div>
-        <div>
+
+                    <!--Qariah Information -->
+                    <div class="col-md-9 form-horizontal">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Qariah Information</div>
+                            <div class="panel-body">
+                                
+                                <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                                    <ul id="myTab" class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Profile</a></li>
+                                        <li role="presentation"><a href="#contact" id="contact-tab" role="tab" data-toggle="tab" aria-controls="contact" aria-expanded="true">Contact</a></li>
+                                        <li role="presentation"><a href="#verification" id="verification-tab" role="tab" data-toggle="tab" aria-controls="verification" aria-expanded="true">Verification</a></li>
+                                        
+                                    </ul>
+
+                                    <div id="myTabContent" class="tab-content">
+                                        
+                                        <div role="tabpanel" class="tab-pane fade in active" id="profile" aria-labelledby="profile-tab">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Name</label>
+                                                    <input type="text" class="form-control" name="fullname" value="{{ $user->name }}" id="name" readonly>    
+                                                </div>
+            
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">I/C</label>
+                                                            <input type="text" class="form-control" name="ic" value="{{ $user->ic }}" id="ic" readonly>
+                                                        </div>
+            
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">Age</label>
+            
+                                                            <input type="text" class="form-control" name="age" value="{{ $user->age }}" id="age" readonly>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">Email</label>
+                                                    
+                                                            <input type="text" class="form-control" name="email" value="{{ $user->email }}" id="email" readonly>
+                                                        </div>   
+                                                    </div>    
+                                                </div> 
+                                
+                                                <div class="form-group">
+                                                    <label class="control-label">Address</label>
+                                                        
+                                                    <input type="text" class="form-control" name="address" value="{{ $user->address }}, {{ $user->postcode }}, {{ $user->city }}, {{ $user->state }}" id="address" readonly>       
+                                                </div>
+            
+                                                <div class="form-group">
+                                                    <label class="control-label">Marital Status</label>
+                                                    <input type="text" class="form-control" name="martial" value="{{ $user->marital_status }}" id="martial" readonly>     
+                                                </div>
+            
+                                                
+            
+                                                <div class="form-group ">
+                                                    <label class="control-label">Residence Period</label>
+                                                    <input type="text" class="form-control" name="rperiod" value="{{ $user->residence_period }}" id="residence" readonly>
+                                                        
+                                                </div>
+                                                
+            
+            
+                                            </div>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="contact" aria-labelledby="contact-tab">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                        
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Home No</label>
+                                                            <input type="text" class="form-control" name="hnumber" value="{{ $user->phone_home }}" id="home" readonly>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Phone No</label>
+                                                            <input type="text" class="form-control" name="pnumber" value="{{ $user->phone_mobile }}" id="phone" readonly>
+                                                        </div>
+                                                        
+            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div role="tabpanel" class="tab-pane fade" id="verification" aria-labelledby="verification-tab">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                        
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Nazir Remarks</label>
+                                                            <input type="text" class="form-control" name="nremarks" value="{{ $user->remarks_nazir }}" id="nremarks" readonly>    
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Verify Date (Nazir)</label>
+                                                            {{Form::date('nazir_verify_date', \Carbon\Carbon::parse($user->verify_date_nazir), ['class' => 'form-control', 'id' => 'nazir_verify_date', 'readonly' => 'true'])}}
+                                                        </div>
+                                                                
+                                                    </div>
+                                                    <br>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Head Village Remarks</label>
+                                                            <input type="text" class="form-control" name="hvremarks" value="{{ $user->remarks_headv }}" id="hvremarks" readonly>    
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label class="control-label">Verify Date (Head Village)</label>
+                                                            {{Form::date('hv_verify_date', \Carbon\Carbon::parse($user->verify_date_headv), ['class' => 'form-control', 'id' => 'hv_verify_date', 'readonly' => 'true'])}}    
+                                                        </div>
+                                                        
+            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        @endif
     </div>
 </div>
 @endsection
+

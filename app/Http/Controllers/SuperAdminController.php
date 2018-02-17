@@ -311,38 +311,15 @@ class SuperAdminController extends Controller
 
     public function mosque()
     {
-        $id = auth()->user()->id;
-        $super =  Superadmin::find($id);
-        return view('superadmin.mosque')->with('super',$super);
+        $mosques =  Admin::all();
+        return view('superadmin.mosque')->with('mosques',$mosques);
     }
 
     public function qariah()
     {
-        $id = auth()->user()->id;
-        $super =  Superadmin::find($id);
-        return view('superadmin.qariah')->with('super',$super);
-    }
+        $users = User::all();
 
-    public function getMosque()
-    {
-        $id = auth()->user()->id;
-        $mosque = Admin::all();
-        return Datatables::of($mosque)
-        ->addColumn('Action', 'components.action')
-        ->rawColumns(['Action'])
-        ->toJson();
-   
-    }
-
-    public function getQariah()
-    {
-        $id = auth()->user()->id;
-        $qariah = User::all();
-        return Datatables::of($qariah)
-        ->addColumn('Action', 'components.action')
-        ->rawColumns(['Action'])
-        ->toJson();
-   
+        return view('superadmin.qariah')->with('users', $users);
     }
 
     public function mosque_create()
@@ -491,7 +468,7 @@ class SuperAdminController extends Controller
         $super->password = bcrypt($request->get('new-password'));
         $super->save();
 
-        return redirect()->route('superadmin.dashboard')->with('success','Password changed successfully !');
+        return redirect()->route('superadmin.dashboard')->with('success','Password changed successfully!');
         
     }
 

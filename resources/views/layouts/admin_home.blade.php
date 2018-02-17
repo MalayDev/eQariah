@@ -103,7 +103,12 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <h1> <a class="navbar-brand" href="index.html">Admin</a></h1>         
+                        @if(Auth::guard('superadmin')->check())
+                            <h1> <a class="navbar-brand" href="{{ route('superadmin.dashboard')}}">Superadmin</a></h1> 
+                        @elseif(Auth::guard('admin')->check())
+                            <h1> <a class="navbar-brand" href="{{ route('admin.dashboard') }}">Admin</a></h1> 
+                        @endif
+                                
                     </div>
              
                
@@ -116,10 +121,14 @@
                               <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span class=" name-caret">{{ ucwords(Auth::user()->name) }}<i class="caret"></i></span><img src="{{ asset('storage/user.jpg') }}"></a>
                               <ul class="dropdown-menu " role="menu">
                                 <li>
-                                    @if(Auth::guard('admin')->check())
-                                        <a href="{{ route('admin.logout') }}">
+                                    @if(Auth::guard('superadmin')->check())
+                                        <a href="{{ route('superadmin.logout') }}">
                                             Logout <i class="fa fa-sign-out"></i>      
                                         </a>
+                                    @elseif(Auth::guard('admin')->check())
+                                    <a href="{{ route('admin.logout') }}">
+                                        Logout <i class="fa fa-sign-out"></i>      
+                                    </a>
                                     @endif
                                 </li>
                               </ul>

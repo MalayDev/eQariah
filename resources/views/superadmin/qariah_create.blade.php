@@ -1,9 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.admin_home')
 
 @section('content')
-<div class="container">
+
 @component('components.breadcumb')
 @endcomponent
+
+<div class="grid-form">
+    <div class="grid-form1">
+
 
     @if(session('success'))
     <div class="alert alert-success alert-dismissible" role="alert">
@@ -160,7 +164,7 @@
                         <div class="panel-heading">Part B: Qariah Profile Photo</div>
                         <div class="panel-body">
                             <div class="row">
-                                <img  class="col-md-12 col-md-offset-3" style="width:50%" src="{{ asset('storage/noimage.jpg') }}">
+                                <img  class="col-md-12 col-md-offset-3" style="width:50%" src="{{ asset('storage/user_images/noimage.jpg') }}">
                             </div>
                             <br>
                             <div class="row">
@@ -230,5 +234,5 @@
 
             </div>
         {!! Form::close() !!}    
-</div>
+    </div></div>
 @endsection

@@ -5,7 +5,7 @@
 <div class="login">
     <h1><a href="{{route('user.login')}}">e-Qariah</a></h1>
     <div class="login-bottom">
-        <h2>Log masuk</h2>
+        <h2>Login</h2>
         <form class="form-horizontal" method="POST" action="{{ route('admin.login.submit') }}">
             {{ csrf_field() }}
             <div class="col-md-12">
