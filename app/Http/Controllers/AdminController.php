@@ -276,13 +276,14 @@ class AdminController extends Controller
     public function export($type){
 
         //$rt = Roadtanker::select('plate', 'capacity', 'terminal')->get()->toArray();
-        $rt = Roadtanker::join('haulers', 'roadtankers.hauler_id', '=', 'haulers.id')->select('plate', 'capacity', 'terminal', 'haulers.name as Hauler')->get()->toArray();
-        
-        return \Excel::create('rt-list' , function($excel) use ($rt) {
+        //$rt = Roadtanker::join('haulers', 'roadtankers.hauler_id', '=', 'haulers.id')->select('plate', 'capacity', 'terminal', 'haulers.name as Hauler')->get()->toArray();
+        $user = User::select('name', 'ic', 'email', 'age', 'marital_status')->get()->toArray();
 
-            $excel->sheet('Roadtanker-List', function($sheet) use ($rt){
+        return \Excel::create('qariah-list('.date('Y-m-d h:i:s').')' , function($excel) use ($user) {
 
-                $sheet->fromArray($rt);
+            $excel->sheet('Qariah-List', function($sheet) use ($user){
+
+                $sheet->fromArray($user);
 
             });
 
