@@ -21,7 +21,7 @@
                     {{ csrf_field() }}
                 <div class="row">
                     <!--Qariah Photo -->
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">Qariah Picture</div>
                             <div class="panel-body">
@@ -37,13 +37,14 @@
                             </div>
                                     
                         </div>
-                    </div>
+                    </div> -->
 
                     <!--Qariah Information -->
-                    <div class="col-md-9 form-horizontal">
-                        <div class="panel panel-default">
+                    <div class="col-md-12 form-horizontal">
+
+                        <!-- <div class="panel panel-default">
                             <div class="panel-heading">Qariah Information</div>
-                            <div class="panel-body">
+                            <div class="panel-body"> -->
                                 
                                 <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
                                     <ul id="myTab" class="nav nav-tabs" role="tablist">
@@ -166,8 +167,8 @@
                                 </div>
                                 
                                 
-                            </div>
-                        </div>
+                            <!-- </div>
+                        </div> -->
                     </div>
                 </div>
             </form>
